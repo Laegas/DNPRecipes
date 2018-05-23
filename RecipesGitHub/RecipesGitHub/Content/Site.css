@@ -47,9 +47,107 @@ footer {
 }
 
 .card-header .text-muted {
-    color: rgb(220, 220, 220)!important;
+    color: rgba(255, 255, 255, 0.6)!important;
 }
 
 button:focus {
     outline-color: #93b151;
+    box-shadow: none;
+}
+
+.btn-primary:focus,
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.grey-border {
+    border-color: rgba(0, 0, 0, 0.125) !important;
+}
+
+.green-border {
+    border-color: #93b151;
+}
+
+.form-control {
+    width: auto;
+}
+
+.form-group .form-control {
+    width: 100%;
+}
+
+.form-control:focus {
+    outline-color: #93b151;
+    border-color: #93b151;
+}
+
+.rounded-only-top {
+    border-radius: .25rem .25rem 0 0;
+}
+
+.rounded-only-bottom {
+    border-radius: 0 0 .25rem .25rem;
+}
+
+.comment-main {
+    background-color: #93b151;
+}
+
+.comment-main ul {
+    list-style: none;
+}
+
+.sub-cmt-img {
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50%;
+}
+
+.main-cmt-img {
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 100%;
+    border-radius: 50%;
+    background-color: #f3f3f3 !important;
+}
+
+.user-comment {
+    background-color: #f3f3f3 !important;
+}
+
+.user-comment .small {
+    line-height: 24px;
+}
+
+.user-comment-desc, .user-comment span {
+    color: #a0a0a0;
+}
+
+.user-comment-desc p {
+    font-size: 12px;
+    display: inline-block;
+    float: left;
+}
+
+.send-icon i {
+    font-size: 20px;
+    background: #f3f3f3;
+    padding: 7px 7px;
+    border-radius: 50%;
+    color: #93b151;
+    height: 36px;
+    width: 36px;
+    text-align: left;
+}
+
+.user-comment:before {
+    content: "";
+    height: 0;
+    width: 0;
+    top: 0;
+    left: -10px;
+    position: absolute;
+    border-style: solid;
+    border-width: 13px 0 0 13px;
+    border-color: #f3f3f3 transparent transparent transparent;
 }

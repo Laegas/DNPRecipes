@@ -8,12 +8,12 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                Ingredients
+                <i class="fas fa-list-ul"></i> Ingredients
             </div>
             <ul class="list-group list-group-flush">
                 @{ for (int i = 0; i < 4; i++)
                     {
-                        <li class="list-group-item">Ingredient @(i + 1)</li>
+                        <li class="list-group-item"><i class="far fa-dot-circle"></i> Ingredient @(i + 1)</li>
                     }
                 }
             </ul>
@@ -22,7 +22,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title"><i class="fas fa-utensils"></i> Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>
@@ -34,11 +34,50 @@
 <br />
 <div class="card ">
     <div class="card-header">
-        <span class="float-left">Description</span> 
-        <span class="float-right small text-muted">2 days ago</span>
+        <span class="float-left">Description</span>
+        <span class="float-right small text-muted"><i class="far fa-clock"></i> Created 5 days ago</span>
     </div>
     <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 comment-main rounded">
+            <ul class="p-0">
+                <li>
+                    <div class="row comment-box p-1 pt-3 pr-3">
+                        <div class="col-md-1 col-3 user-img text-center">
+                            <img src="~/img/woman_avatar.png" class="main-cmt-img">
+                        </div>
+                        <div class="col-md-11 col-9 user-comment bg-light rounded pb-1">
+                            
+                            <div class="row">
+                                <div class="col-12 border-bottom user-comment-desc pl-3 pr-3 p-1">
+                                    <strong class="float-left">Name</strong>
+                                    <span class="float-right text-muted small"><i class="far fa-clock"></i> Posted 1 day ago</i>
+                                </div>
+                                <div class="col-12 pl-3 p-1">
+                                    <p class="w-100 m-0">Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <hr>
+                    <div class="row">
+                        <div class="col-11 pl-3 pr-0">
+                            <input type="text" class="form-control" placeholder="Write your comment">
+                        </div>
+                        <div class="col-1 text-center send-icon">
+                            <a href="#"><i class="fas fa-paper-plane" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

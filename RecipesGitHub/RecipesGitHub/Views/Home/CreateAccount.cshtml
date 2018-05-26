@@ -1,3 +1,29 @@
-﻿<h1>Create account</h1>
+﻿@{
+    ViewBag.Title = "Create Account";
+}
 
+<h1 class="text-center">Create account</h1>
 
+<div class="d-flex justify-content-center">
+    <form>
+        <div class="form-group mb-2">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group mb-2">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group mb-2">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="conditions">
+            <label class="form-check-label" for="conditions">Agree with our AWSOME conditions</label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Create account</button>
+        </div>
+    </form>
+</div>

@@ -1,8 +1,12 @@
-﻿@{
+﻿@model RECIPE
+@{
     ViewBag.Title = "See Recipe";
 }
 
-<h1>See recipe</h1>
+@ViewBag.potato1
+@ViewBag.potato2
+@ViewBag.potato3
+@*@(Model.NAME ?? String.empty*@
 
 <div class="row">
     <div class="col-md-4">
@@ -13,7 +17,9 @@
             <ul class="list-group list-group-flush">
                 @{ for (int i = 0; i < 4; i++)
                     {
-                        <li class="list-group-item">Ingredient @(i + 1)</li>
+                <li class="list-group-item">Ingredient @(i + 1) @ViewBag.potato
+                
+                </li>
                     }
                 }
             </ul>
@@ -22,7 +28,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title"> title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>

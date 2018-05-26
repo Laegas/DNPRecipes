@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID_ACCOUNT" />
+          </Key>
+          <Property Name="ID_ACCOUNT" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ACCOUNT_PERMISSIONS" Type="number" Precision="38" Scale="0" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="255" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ACCOUNT_PERMISSION">
+          <Key>
+            <PropertyRef Name="ID_ACCOUNT_PERMISSION" />
+          </Key>
+          <Property Name="ID_ACCOUNT_PERMISSION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="ID_RECIPE" />
+          </Key>
+          <Property Name="ID_USER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RECIPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="HEADER" Type="varchar2" MaxLength="100" />
+          <Property Name="BODY" Type="varchar2" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="INGREDIENT">
+          <Key>
+            <PropertyRef Name="ID_INGREDIENT" />
+          </Key>
+          <Property Name="ID_INGREDIENT" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="INGREDIENT_IN_RECIPE">
+          <Key>
+            <PropertyRef Name="ID_RECIPE" />
+            <PropertyRef Name="ID_INGREDIENT" />
+          </Key>
+          <Property Name="ID_RECIPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_INGREDIENT" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="AMOUNT" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_MEASUREMENT" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="MEASUREMENT_UNIT">
+          <Key>
+            <PropertyRef Name="ID_MEASUREMENT" />
+          </Key>
+          <Property Name="ID_MEASUREMENT" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TEXT" Type="varchar2" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="RECIPE">
+          <Key>
+            <PropertyRef Name="ID_RECIPE" />
+          </Key>
+          <Property Name="ID_RECIPE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="2" />
+          <Property Name="IMAGE_FOLDER" Type="varchar2" MaxLength="512" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="4000" />
+        </EntityType>
+        <Association Name="SYS_C009453">
+          <End Role="ACCOUNT_PERMISSION" Type="Self.ACCOUNT_PERMISSION" Multiplicity="0..1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT_PERMISSION">
+              <PropertyRef Name="ID_ACCOUNT_PERMISSION" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_ACCOUNT_PERMISSIONS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009458">
+          <End Role="RECIPE" Type="Self.RECIPE" Multiplicity="1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009459">
+          <End Role="INGREDIENT" Type="Self.INGREDIENT" Multiplicity="1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGREDIENT">
+              <PropertyRef Name="ID_INGREDIENT" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_INGREDIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009460">
+          <End Role="MEASUREMENT_UNIT" Type="Self.MEASUREMENT_UNIT" Multiplicity="0..1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEASUREMENT_UNIT">
+              <PropertyRef Name="ID_MEASUREMENT" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_MEASUREMENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009462">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID_ACCOUNT" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009463">
+          <End Role="RECIPE" Type="Self.RECIPE" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ID_RECIPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="ACCOUNT_PERMISSION" EntityType="Self.ACCOUNT_PERMISSION" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="INGREDIENT" EntityType="Self.INGREDIENT" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="INGREDIENT_IN_RECIPE" EntityType="Self.INGREDIENT_IN_RECIPE" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="MEASUREMENT_UNIT" EntityType="Self.MEASUREMENT_UNIT" Schema="ROOT" store:Type="Tables" />
+          <EntitySet Name="RECIPE" EntityType="Self.RECIPE" Schema="ROOT" store:Type="Tables" />
+          <AssociationSet Name="SYS_C009453" Association="Self.SYS_C009453">
+            <End Role="ACCOUNT_PERMISSION" EntitySet="ACCOUNT_PERMISSION" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009458" Association="Self.SYS_C009458">
+            <End Role="RECIPE" EntitySet="RECIPE" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009459" Association="Self.SYS_C009459">
+            <End Role="INGREDIENT" EntitySet="INGREDIENT" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009460" Association="Self.SYS_C009460">
+            <End Role="MEASUREMENT_UNIT" EntitySet="MEASUREMENT_UNIT" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009462" Association="Self.SYS_C009462">
+            <End Role="account" EntitySet="account" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009463" Association="Self.SYS_C009463">
+            <End Role="RECIPE" EntitySet="RECIPE" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID_ACCOUNT" />
+          </Key>
+          <Property Name="ID_ACCOUNT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ACCOUNT_PERMISSIONS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ACCOUNT_PERMISSION" Relationship="Self.SYS_C009453" FromRole="account" ToRole="ACCOUNT_PERMISSION" />
+          <NavigationProperty Name="comments" Relationship="Self.SYS_C009462" FromRole="account" ToRole="comment" />
+        </EntityType>
+        <EntityType Name="ACCOUNT_PERMISSION">
+          <Key>
+            <PropertyRef Name="ID_ACCOUNT_PERMISSION" />
+          </Key>
+          <Property Name="ID_ACCOUNT_PERMISSION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.SYS_C009453" FromRole="ACCOUNT_PERMISSION" ToRole="account" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="ID_RECIPE" />
+          </Key>
+          <Property Name="ID_USER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RECIPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="HEADER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BODY" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="account" Relationship="Self.SYS_C009462" FromRole="comment" ToRole="account" />
+          <NavigationProperty Name="RECIPE" Relationship="Self.SYS_C009463" FromRole="comment" ToRole="RECIPE" />
+        </EntityType>
+        <EntityType Name="INGREDIENT">
+          <Key>
+            <PropertyRef Name="ID_INGREDIENT" />
+          </Key>
+          <Property Name="ID_INGREDIENT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INGREDIENT_IN_RECIPE" Relationship="Self.SYS_C009459" FromRole="INGREDIENT" ToRole="INGREDIENT_IN_RECIPE" />
+        </EntityType>
+        <EntityType Name="INGREDIENT_IN_RECIPE">
+          <Key>
+            <PropertyRef Name="ID_RECIPE" />
+            <PropertyRef Name="ID_INGREDIENT" />
+          </Key>
+          <Property Name="ID_RECIPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_INGREDIENT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="AMOUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_MEASUREMENT" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="INGREDIENT" Relationship="Self.SYS_C009459" FromRole="INGREDIENT_IN_RECIPE" ToRole="INGREDIENT" />
+          <NavigationProperty Name="RECIPE" Relationship="Self.SYS_C009458" FromRole="INGREDIENT_IN_RECIPE" ToRole="RECIPE" />
+          <NavigationProperty Name="MEASUREMENT_UNIT" Relationship="Self.SYS_C009460" FromRole="INGREDIENT_IN_RECIPE" ToRole="MEASUREMENT_UNIT" />
+        </EntityType>
+        <EntityType Name="MEASUREMENT_UNIT">
+          <Key>
+            <PropertyRef Name="ID_MEASUREMENT" />
+          </Key>
+          <Property Name="ID_MEASUREMENT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TEXT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INGREDIENT_IN_RECIPE" Relationship="Self.SYS_C009460" FromRole="MEASUREMENT_UNIT" ToRole="INGREDIENT_IN_RECIPE" />
+        </EntityType>
+        <EntityType Name="RECIPE">
+          <Key>
+            <PropertyRef Name="ID_RECIPE" />
+          </Key>
+          <Property Name="ID_RECIPE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IMAGE_FOLDER" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comments" Relationship="Self.SYS_C009463" FromRole="RECIPE" ToRole="comment" />
+          <NavigationProperty Name="INGREDIENT_IN_RECIPE" Relationship="Self.SYS_C009458" FromRole="RECIPE" ToRole="INGREDIENT_IN_RECIPE" />
+        </EntityType>
+        <Association Name="SYS_C009453">
+          <End Role="ACCOUNT_PERMISSION" Type="Self.ACCOUNT_PERMISSION" Multiplicity="0..1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT_PERMISSION">
+              <PropertyRef Name="ID_ACCOUNT_PERMISSION" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="ID_ACCOUNT_PERMISSIONS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009462">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID_ACCOUNT" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009463">
+          <End Role="RECIPE" Type="Self.RECIPE" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ID_RECIPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009459">
+          <End Role="INGREDIENT" Type="Self.INGREDIENT" Multiplicity="1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGREDIENT">
+              <PropertyRef Name="ID_INGREDIENT" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_INGREDIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009458">
+          <End Role="RECIPE" Type="Self.RECIPE" Multiplicity="1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_RECIPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C009460">
+          <End Role="MEASUREMENT_UNIT" Type="Self.MEASUREMENT_UNIT" Multiplicity="0..1" />
+          <End Role="INGREDIENT_IN_RECIPE" Type="Self.INGREDIENT_IN_RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEASUREMENT_UNIT">
+              <PropertyRef Name="ID_MEASUREMENT" />
+            </Principal>
+            <Dependent Role="INGREDIENT_IN_RECIPE">
+              <PropertyRef Name="ID_MEASUREMENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="ACCOUNT_PERMISSION" EntityType="Self.ACCOUNT_PERMISSION" />
+          <EntitySet Name="comments" EntityType="Self.comment" />
+          <EntitySet Name="INGREDIENTs" EntityType="Self.INGREDIENT" />
+          <EntitySet Name="INGREDIENT_IN_RECIPE" EntityType="Self.INGREDIENT_IN_RECIPE" />
+          <EntitySet Name="MEASUREMENT_UNIT" EntityType="Self.MEASUREMENT_UNIT" />
+          <EntitySet Name="RECIPEs" EntityType="Self.RECIPE" />
+          <AssociationSet Name="SYS_C009453" Association="Self.SYS_C009453">
+            <End Role="ACCOUNT_PERMISSION" EntitySet="ACCOUNT_PERMISSION" />
+            <End Role="account" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009462" Association="Self.SYS_C009462">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009463" Association="Self.SYS_C009463">
+            <End Role="RECIPE" EntitySet="RECIPEs" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009459" Association="Self.SYS_C009459">
+            <End Role="INGREDIENT" EntitySet="INGREDIENTs" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009458" Association="Self.SYS_C009458">
+            <End Role="RECIPE" EntitySet="RECIPEs" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C009460" Association="Self.SYS_C009460">
+            <End Role="MEASUREMENT_UNIT" EntitySet="MEASUREMENT_UNIT" />
+            <End Role="INGREDIENT_IN_RECIPE" EntitySet="INGREDIENT_IN_RECIPE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="Model.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="ID_ACCOUNT" ColumnName="ID_ACCOUNT" />
+                <ScalarProperty Name="ID_ACCOUNT_PERMISSIONS" ColumnName="ID_ACCOUNT_PERMISSIONS" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCOUNT_PERMISSION">
+            <EntityTypeMapping TypeName="Model.ACCOUNT_PERMISSION">
+              <MappingFragment StoreEntitySet="ACCOUNT_PERMISSION">
+                <ScalarProperty Name="ID_ACCOUNT_PERMISSION" ColumnName="ID_ACCOUNT_PERMISSION" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="Model.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="ID_RECIPE" ColumnName="ID_RECIPE" />
+                <ScalarProperty Name="HEADER" ColumnName="HEADER" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGREDIENTs">
+            <EntityTypeMapping TypeName="Model.INGREDIENT">
+              <MappingFragment StoreEntitySet="INGREDIENT">
+                <ScalarProperty Name="ID_INGREDIENT" ColumnName="ID_INGREDIENT" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGREDIENT_IN_RECIPE">
+            <EntityTypeMapping TypeName="Model.INGREDIENT_IN_RECIPE">
+              <MappingFragment StoreEntitySet="INGREDIENT_IN_RECIPE">
+                <ScalarProperty Name="ID_RECIPE" ColumnName="ID_RECIPE" />
+                <ScalarProperty Name="ID_INGREDIENT" ColumnName="ID_INGREDIENT" />
+                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="ID_MEASUREMENT" ColumnName="ID_MEASUREMENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEASUREMENT_UNIT">
+            <EntityTypeMapping TypeName="Model.MEASUREMENT_UNIT">
+              <MappingFragment StoreEntitySet="MEASUREMENT_UNIT">
+                <ScalarProperty Name="ID_MEASUREMENT" ColumnName="ID_MEASUREMENT" />
+                <ScalarProperty Name="TEXT" ColumnName="TEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECIPEs">
+            <EntityTypeMapping TypeName="Model.RECIPE">
+              <MappingFragment StoreEntitySet="RECIPE">
+                <ScalarProperty Name="ID_RECIPE" ColumnName="ID_RECIPE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="IMAGE_FOLDER" ColumnName="IMAGE_FOLDER" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

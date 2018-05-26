@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6845050b02bd4c6099ce1d0c6087f1f8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.account" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ACCOUNT_PERMISSION" Width="1.5" PointX="1.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.comment" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INGREDIENT" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INGREDIENT_IN_RECIPE" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MEASUREMENT_UNIT" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RECIPE" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.SYS_C009453" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C009462" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C009463" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C009459" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C009458" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SYS_C009460" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,13 +1,11 @@
-﻿@model RECIPE
+﻿@using RecipesGitHub.Models
+@model FullRecipe
 @{
     ViewBag.Title = "See Recipe";
 }
 
-@ViewBag.potato1
-@ViewBag.potato2
-@ViewBag.potato3
 @*@(Model.NAME ?? String.empty*@
-@Model.NAME
+<h1>number of ingredients in the recipe @Model.Ingredients.Count </h1>
 
 
 <div class="row">
@@ -30,7 +28,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"> title</h5>
+                <h5 class="card-title"> @Model.name </h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>

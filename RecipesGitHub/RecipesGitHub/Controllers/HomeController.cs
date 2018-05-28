@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RecipesGitHub.Models;
+using RecipesGitHub.Models.DAO;
+using RecipesGitHub.Models.display;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,57 +14,30 @@ namespace RecipesGitHub.Controllers
         public ActionResult Index()
         {
             // get all recipes with images
-            List<RECIPE> listOfREcipeWithNoImage = new List<RECIPE>();
+            List<DisplaySimpleRecipe> listOfREcipeWithNoImage = RecipeLoader.GetDisplaySimpleRecipes();
 
-            using(var db = new Entities1()) {
-
-                System.Data.Entity.DbSet<RECIPE> recipes = db.RECIPEs;
-                ViewBag.potato = "shiit";
-                foreach(var recipe in recipes)
-                {
-                    listOfREcipeWithNoImage.Add(recipe);
-                    ViewBag.potato = "yaay";
-                    break;
-                }
-
-            }
-
-            // create list of recipes with the images and send to view
 
             return View(listOfREcipeWithNoImage);
         }
 
         public ActionResult SeeRecipe(String id)
         {
-
-            RECIPE recipeWithoutImage = null;
-            // get the person from database
-            using (var db = new Entities1())
+            FullRecipe objectToPass;
+            if (id == "")
             {
-                System.Data.Entity.DbSet <RECIPE> recipes = db.RECIPEs;
-                int counter = 0;
-                foreach(var aRecipe in recipes)
-                {
-                    counter++;
-                    ViewBag.potato1 = aRecipe.NAME;
-                    ViewBag.potato2 = id;
-                    if (aRecipe.NAME.Equals(id))
-                    {
-                        recipeWithoutImage = aRecipe;
-                        ViewBag.potato1 = "yaaaaaa";
-                        ViewBag.potato2 = "success";
-                        ViewBag.potato3 = aRecipe;
-                        return View(aRecipe);
-                    }
-                }
-
+                objectToPass = new FullRecipe();
             }
-
+            else
+            {
+                objectToPass= RecipeLoader.GetFullRecipe(id);
+                ViewBag.potato4 = objectToPass.Ingredients.Count;
+                
+            }
             //get the image from local files
 
             // send ther recipe with image object to the view
 
-            return View(recipeWithoutImage);
+            return View(objectToPass);
 
         }
 

@@ -1,5 +1,7 @@
-﻿@model List<RECIPE>
+﻿@using RecipesGitHub.Models.display
+@model List<DisplaySimpleRecipe>
 
+<h1>current number of Recipes in database @Model.Count</h1>
 @{ 
     ViewBag.Title = "Recipe List";
 }

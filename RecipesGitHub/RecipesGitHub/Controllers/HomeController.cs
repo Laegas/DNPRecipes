@@ -46,9 +46,8 @@ namespace RecipesGitHub.Controllers
             return View();
         }
 
-        public ActionResult CreateAccount(int id)
+        public ActionResult CreateAccount()
         {
-            ViewBag.myID = "id";
             return View();
         }
     }

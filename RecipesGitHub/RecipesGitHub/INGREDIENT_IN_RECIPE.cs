@@ -11,14 +11,14 @@ namespace RecipesGitHub
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class INGREDIENT_IN_RECIPE
     {
         public decimal ID_RECIPE { get; set; }
         public decimal ID_INGREDIENT { get; set; }
         public Nullable<decimal> AMOUNT { get; set; }
         public Nullable<decimal> ID_MEASUREMENT { get; set; }
-
+    
         public virtual INGREDIENT INGREDIENT { get; set; }
         public virtual RECIPE RECIPE { get; set; }
         public virtual MEASUREMENT_UNIT MEASUREMENT_UNIT { get; set; }

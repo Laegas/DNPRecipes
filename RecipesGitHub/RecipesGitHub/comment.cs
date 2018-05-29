@@ -19,7 +19,7 @@ namespace RecipesGitHub
         public string HEADER { get; set; }
         public string BODY { get; set; }
     
-        public virtual account account { get; set; }
+        public virtual account theAccount { get; set; }
         public virtual RECIPE RECIPE { get; set; }
     }
 }

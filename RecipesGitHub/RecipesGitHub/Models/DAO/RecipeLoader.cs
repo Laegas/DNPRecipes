@@ -17,7 +17,7 @@ namespace RecipesGitHub.Models.DAO
         //load multible dimple recipes to display on the index page
         public static List<DisplaySimpleRecipe> GetDisplaySimpleRecipes()
         {
-            using (var db = new Entities1())
+            using (var db = new RecipeDBConnection())
             {
                 DisplaySimpleRecipe simpleRecipe = new DisplaySimpleRecipe();
                 var recipe = db.RECIPEs;
@@ -42,7 +42,7 @@ namespace RecipesGitHub.Models.DAO
 
         public static FullRecipe GetFullRecipe(String recipeName)
         {
-            using (var db = new Entities1())
+            using (var db = new RecipeDBConnection())
             {
                 FullRecipe result = new FullRecipe();
                 DbSet<RECIPE> recipes = db.RECIPEs;

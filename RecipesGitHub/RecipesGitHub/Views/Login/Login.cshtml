@@ -1,0 +1,24 @@
+﻿@using System.Web
+
+@{
+    var request = HttpContext.Current.Request;
+    var response = HttpContext.Current.Response;
+}
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@if (response.Cookies.AllKeys.Contains("USERNAME"))
+{
+    // retrieve cookie data here
+    <h2>you are now forever known as @response.Cookies["USERNAME"].Value </h2>
+
+}
+else
+{
+    <h2>you were not logged in</h2>
+
+}
+

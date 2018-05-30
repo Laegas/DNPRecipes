@@ -28,13 +28,13 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"> @Model.name </h5>
+                <h5 class="card-title"> @Model.GetName() </h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <img class="rounded img-fluid" src="http://via.placeholder.com/400x400" alt="Placeholder" />
+        <img class="rounded img-fluid" src="@Model.ImagePath" alt="Placeholder" />
     </div>
 </div>
 <br />

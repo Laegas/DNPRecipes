@@ -10,6 +10,9 @@ namespace RecipesGitHub.Controllers
     public class UploadController : Controller
     {
 
+        public static readonly String IMAGE_PATH = @"C:\Users\kenneth\source\repos\DNPRecipes\RecipesGitHub\RecipesGitHub\img\recipeImages\";
+
+
         // POST: Upload
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateAccount()
@@ -97,10 +100,15 @@ namespace RecipesGitHub.Controllers
 
                 //ViewBag.test1 = image_file.FileName;
 
-                String fileName = Path.GetFileName(image_file.FileName);
-                TempData["test1"] = "something good is going on, file name: " + fileName;
+                String fileExtension = Path.GetExtension(image_file.FileName);
+                String recipeName = Request.Form["recipeName"];
 
-                image_file.SaveAs("c:\\users\\kenneth\\desktop\\image.jpg");
+                System.IO.Directory.CreateDirectory(IMAGE_PATH + "\\" + recipeName);
+                image_file.SaveAs(IMAGE_PATH + recipeName + "\\" + recipeName + "." + fileExtension);
+
+
+                //TempData["test1"] = "something good is going on, file name: " + fileName;
+
                 
                 return RedirectToAction("Index");
 
@@ -108,6 +116,41 @@ namespace RecipesGitHub.Controllers
             TempData["test1"]  = "no image was uploaded";
             return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public ActionResult CreateRecipe(HttpPostedFile image)
+        {
+
+            String recipeName;
+            String longDescription;
+            String shortDescription;
+            String jsonIngredientList;
+
+            //if data is shit
+            foreach(String key in Request.Form.AllKeys)
+            {
+                if(key == "name"){
+                    recipeName = Request.Form[key];
+                }
+                if (key == "short_desc")
+                {
+                    shortDescription= Request.Form[key];
+                }
+                if (key == "long_desc")
+                {
+                    longDescription = Request.Form[key];
+                }
+                if(key == "ingredients")
+                {
+                    jsonIngredientList = Request.Form[key];
+                }
+               
+
+
+            }
+
+            return View();
         }
     }
 }

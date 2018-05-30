@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("UploadImage", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <input type="text" name="recipeName" />
     <input type="file" name="image_file" />
     <input type="submit" />
 }

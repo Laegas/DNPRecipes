@@ -19,17 +19,15 @@ namespace RecipesGitHub.Models.DAO
         {
             using (var db = new RecipeDBConnection())
             {
-                DisplaySimpleRecipe simpleRecipe = new DisplaySimpleRecipe();
                 var recipe = db.RECIPEs;
 
                 List<DisplaySimpleRecipe> displayRecipes = new List<DisplaySimpleRecipe>() ;
                 DisplaySimpleRecipe tmpDisplaySimpleRecipe;
                 foreach(RECIPE item in recipe)
                 {
-                    tmpDisplaySimpleRecipe = new DisplaySimpleRecipe();
-                    tmpDisplaySimpleRecipe.RecipeName = item.NAME;
-                    tmpDisplaySimpleRecipe.ShortDescription = item.DESCRIPTION.Substring(0, item.DESCRIPTION.Length / 2);
-                    tmpDisplaySimpleRecipe.ImagePAth = "DEFAULT_NOTHING.jpg";
+                    String recipeNme = item.NAME;
+                    String shortDescription = item.DESCRIPTION;
+                    tmpDisplaySimpleRecipe = new DisplaySimpleRecipe(recipeNme,shortDescription);
                     displayRecipes.Add(tmpDisplaySimpleRecipe);
                     tmpDisplaySimpleRecipe = null;
                 }
@@ -62,7 +60,7 @@ namespace RecipesGitHub.Models.DAO
                     return null;
                 }
 
-                result.name = recipe.NAME;
+                result.SetName(recipe.NAME);
                 result.Description = recipe.DESCRIPTION;
 
                 //Getting the comments for the recipe 

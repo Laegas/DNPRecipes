@@ -23,7 +23,7 @@ namespace RecipesGitHub.Controllers
         public ActionResult SeeRecipe(String id)
         {
             FullRecipe objectToPass;
-            if (id == "")
+            if (id == "" || id == null)
             {
                 objectToPass = new FullRecipe();
             }

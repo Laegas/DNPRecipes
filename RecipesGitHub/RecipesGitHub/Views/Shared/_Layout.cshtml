@@ -4,6 +4,16 @@
     var request = HttpContext.Current.Request;
     var response = HttpContext.Current.Response;
 }
+@{ 
+        try
+        {
+            request.Cookies["USERNAME"].Value = request.Cookies["USERNAME"].Value;
+        }catch(Exception e)
+        {
+            request.Cookies.Add(new HttpCookie("USERNAME"));
+            request.Cookies["USERNAME"].Value = "";
+    }
+}
 
 
 <!DOCTYPE html>
@@ -46,29 +56,29 @@
                         <li class="nav-item">
                             @Html.ActionLink("Create Recipe", "CreateRecipe", "Home", null, new { @class = "nav-link" })
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Create Account", "CreateAccount", "Home", null, new { @class = "nav-link" })
-                        </li>
-                        @if (request.Cookies["USERNAME"].Value != null && request.Cookies["USERNAME"].Value != "")
+
+                        @if (request.Cookies["USERNAME"].Value != "")
                         {
                             <p>Hello @request.Cookies["USERNAME"].Value </p>
                         }
                         else
                         {
                             @Html.ActionLink("Login", null, "Login", null, new { @class = "nav-link" })
-
+                            <li class="nav-item">
+                                @Html.ActionLink("Create Account", "CreateAccount", "Home", null, new { @class = "nav-link" })
+                            </li>
                         }
                         <!--
-        <li class="nav-item dropdown">
-            @Html.ActionLink("Dropdown", "Contact", "Home", null, new { @class = "nav-link" })
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-        -->
+    <li class="nav-item dropdown">
+        @Html.ActionLink("Dropdown", "Contact", "Home", null, new { @class = "nav-link" })
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </li>
+    -->
                     </ul>
                     <!--
                     <form class="form-inline my-2 my-lg-0">

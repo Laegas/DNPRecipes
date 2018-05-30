@@ -151,3 +151,8 @@ button:focus {
     border-width: 13px 0 0 13px;
     border-color: #f3f3f3 transparent transparent transparent;
 }
+
+.hidden_file {
+    position: absolute;
+    top: -100px;
+}

@@ -10,33 +10,48 @@
             <div class="card-header">
                 <i class="fas fa-list-ul"></i> Ingredients
             </div>
-            <ul class="list-group list-group-flush">
+            <ul id="ingredients" class="list-group list-group-flush">
                 <li class="list-group-item"><i class="far fa-dot-circle"></i> Ingredient</li>
             </ul>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="btn btn-primary">Add</button>
-            <label class="p-2 m-0" for="sel1">Select ingredient:</label>
-            <select class="green-border form-control" id="sel1">
+        <div class="d-flex justify-content-left align-items-center">
+            <label class="p-2 m-0" for="sel_ingredient">Select ingredient:</label>
+            <select class="green-border form-control" id="sel_ingredient">
                 <option>Apple</option>
                 <option>Flour</option>
                 <option>Chicken</option>
                 <option>Basil</option>
             </select>
         </div>
+        <div class="d-flex justify-content-left align-items-center">
+            <label class="p-2 m-0" for="amount">Amount:</label>
+            <input type="number" id="amount" value="1" />
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+                <label class="p-2 m-0" for="sel_unit">Select unit:</label>
+                <select class="green-border form-control" id="sel_unit">
+                    <option>piece</option>
+                    <option>liter</option>
+                    <option>ml</option>
+                    <option>tbsp</option>
+                </select>
+            </div>
+            <button onclick="addIngredient()" type="button" class="btn btn-primary">Add</button>
+        </div>
     </div>
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-utensils"></i> Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title"><i class="fas fa-utensils"></i><input type="text" id="recipe_name" placeholder="Recipe name" /></h5>
+                <textarea class="form-control w-100 rounded-only-bottom" id="short_description" placeholder="Recipe description" rows="8"></textarea>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <img class="rounded img-fluid" src="http://via.placeholder.com/400x400" alt="Placeholder" />
         <div class="p-2 d-flex justify-content-center align-items-center">
-            <button type="button" class="btn btn-primary">Upload image</button>
+            <button onclick="uploadImage()" type="button" class="btn btn-primary">Upload image</button>
         </div>
     </div>
 </div>
@@ -47,7 +62,17 @@
     </div>
 </div>
 
-<textarea class="form-control w-100 rounded-only-bottom" id="exampleFormControlTextarea1" rows="8"></textarea>
+<textarea class="form-control w-100 rounded-only-bottom" id="long_description" rows="8"></textarea>
 <div class="p-2 d-flex justify-content-center align-items-center">
-    <button type="button" class="btn btn-primary btn-lg">Create recipe</button>
+    <button onclick="submitForm()" type="button" class="btn btn-primary btn-lg">Create recipe</button>
 </div>
+
+
+<form id="hidden_form" method="post" action="/Upload/CreateRecipe" enctype="multipart/form-data">
+    <input id="hidden_ingredients" name="ingredients" type="hidden" value="" required>
+    <input id="hidden_name" name="name" type="hidden" value="" required>
+    <input id="hidden_short_desc" name="short_desc" type="hidden" value="" required>
+    <input id="hidden_long_desc" name="long_desc" type="hidden" value="" required>
+    <input id="hidden_image" class="hidden_file" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" required/>
+</form>
+

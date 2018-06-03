@@ -16,9 +16,17 @@ namespace RecipesGitHub.Models
             this.Comments = new List<comment>();
             this.name = "Recipe name";
             this.Description = "The description goes here";
-            this.Ingredients = new List<DisplayIngredient>();
+            this.Ingredients = new List<JsonIngredient>();
             this.ImagePath = "NO_IMAGE";
 
+        }
+        public FullRecipe(String name, String description, List<JsonIngredient> ingredients)
+        {
+            this.Comments = new List<comment>();
+            this.name = name;
+            this.Description = description;
+            this.Ingredients = ingredients;
+            this.ImagePath = "";
         }
 
         public String GetName()
@@ -44,7 +52,7 @@ namespace RecipesGitHub.Models
         public String ImagePath { get; set; }
         public List<comment> Comments { get; set; }
     
-        public List<DisplayIngredient> Ingredients { get; set; }
+        public List<JsonIngredient> Ingredients { get; set; }
         public String Description { get; set; }
 
 

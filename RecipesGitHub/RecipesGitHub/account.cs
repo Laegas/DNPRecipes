@@ -14,6 +14,7 @@ namespace RecipesGitHub
     
     public partial class account
     {
+        public account() { }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public account(String username, String password)
         {

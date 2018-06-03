@@ -9,6 +9,7 @@
 
 namespace RecipesGitHub
 {
+    using RecipesGitHub.Models;
     using System;
     using System.Collections.Generic;
     
@@ -19,6 +20,14 @@ namespace RecipesGitHub
         {
             this.comments = new HashSet<comment>();
             this.INGREDIENT_IN_RECIPE = new HashSet<INGREDIENT_IN_RECIPE>();
+        }
+        public RECIPE(String recipeName, String description)
+        {
+            this.ID_RECIPE = new Random().Next();
+            this.NAME = recipeName;
+            this.DESCRIPTION = description;
+            this.IMAGE_FOLDER = "";
+
         }
     
         public decimal ID_RECIPE { get; set; }

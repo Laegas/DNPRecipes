@@ -5,14 +5,14 @@
     var response = HttpContext.Current.Response;
 }
 @{ 
-        try
-        {
-            request.Cookies["USERNAME"].Value = request.Cookies["USERNAME"].Value;
-        }catch(Exception e)
-        {
-            request.Cookies.Add(new HttpCookie("USERNAME"));
-            request.Cookies["USERNAME"].Value = "";
-    }
+//    try
+//    {
+//        request.Cookies["USERNAME"].Value = request.Cookies["USERNAME"].Value;
+//    }catch(Exception e)
+//    {
+//        request.Cookies.Add(new HttpCookie("USERNAME"));
+//        request.Cookies["USERNAME"].Value = "";
+//}
 }
 
 
@@ -57,17 +57,18 @@
                             @Html.ActionLink("Create Recipe", "CreateRecipe", "Home", null, new { @class = "nav-link" })
                         </li>
 
-                        @if (request.Cookies["USERNAME"].Value != "")
+                        @try
                         {
-                            <p>Hello @request.Cookies["USERNAME"].Value </p>
+                            <p>@request.Cookies["USERNAME"].Value </p>
                         }
-                        else
+                        catch (Exception e)
                         {
                             @Html.ActionLink("Login", null, "Login", null, new { @class = "nav-link" })
                             <li class="nav-item">
                                 @Html.ActionLink("Create Account", "CreateAccount", "Home", null, new { @class = "nav-link" })
                             </li>
                         }
+
                         <!--
     <li class="nav-item dropdown">
         @Html.ActionLink("Dropdown", "Contact", "Home", null, new { @class = "nav-link" })
@@ -103,6 +104,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="/Scripts/custom.js"></script>
+    <script src="/Scripts/customJS.js"></script>
 </body>
 </html>

@@ -11,15 +11,24 @@ namespace RecipesGitHub.Controllers
 {
     public class HomeController : Controller
     {
+        /**
+         * A list on simple reipe objects are retrived from the database, using the DAO pattern, 
+         * where the implementation utelizes the entity framework
+         * 
+         */
         public ActionResult Index()
         {
             // get all recipes with images
-            List<DisplaySimpleRecipe> listOfREcipeWithNoImage = RecipeLoader.GetDisplaySimpleRecipes();
+            List<DisplaySimpleRecipe> listOfREcipeWithNoImage = RecipeDAO.GetDisplaySimpleRecipes();
 
 
             return View(listOfREcipeWithNoImage);
         }
 
+        /**
+         * A full recipe is retirved from the database using the id from the path as the name of the recipe 
+         * 
+         */
         public ActionResult SeeRecipe(String id)
         {
             FullRecipe objectToPass;
@@ -29,14 +38,11 @@ namespace RecipesGitHub.Controllers
             }
             else
             {
-                objectToPass= RecipeLoader.GetFullRecipe(id);
-                ViewBag.potato4 = objectToPass.Ingredients.Count;
+                objectToPass= RecipeDAO.GetFullRecipe(id);
                 
             }
-            //get the image from local files
 
             // send ther recipe with image object to the view
-
             return View(objectToPass);
 
         }

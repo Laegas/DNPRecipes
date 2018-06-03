@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RecipesGitHub.Models.DAO
 {
-    public class RecipeLoader
+    public class RecipeDAO
     {
 
         public static void Main()
@@ -38,6 +38,10 @@ namespace RecipesGitHub.Models.DAO
             }
         }
 
+        /**
+         * A method for getting a full recipe from the database, 
+         * the main purpose of this is to display the full recipe on the seerecipe site
+         */
         public static FullRecipe GetFullRecipe(String recipeName)
         {
             using (var db = new RecipeDBConnection())
@@ -81,12 +85,11 @@ namespace RecipesGitHub.Models.DAO
                                             join ingredient in db.INGREDIENTs on item.ID_INGREDIENT equals ingredient.ID_INGREDIENT
                                             where item.ID_RECIPE == recipe.ID_RECIPE select item;
 
-                List<DisplayIngredient> displayIngredients = new List<DisplayIngredient>();
+                List<JsonIngredient> displayIngredients = new List<JsonIngredient>();
 
                 foreach(var item in iNGREDIENT_IN_RECIPEs)
                 {
-                        //TODO fix this shit
-                    displayIngredients.Add(new DisplayIngredient(item.INGREDIENT.NAME,999,item.MEASUREMENT_UNIT.TEXT));
+                    displayIngredients.Add(new JsonIngredient(item.INGREDIENT.NAME,999,item.MEASUREMENT_UNIT.TEXT));
                 }
 
                 result.Ingredients = displayIngredients;
@@ -95,5 +98,25 @@ namespace RecipesGitHub.Models.DAO
 
         }
         
+        /**
+         * A method for uploading a Recipe object to the database.
+         */
+        public static bool CreateRecipe(FullRecipe fullRecipe)
+        {
+            using(var db = new RecipeDBConnection())
+            {
+                RECIPE tmpRECIPE = new RECIPE(fullRecipe.GetName(), fullRecipe.Description);
+                db.RECIPEs.Add(tmpRECIPE);
+                foreach(var ingredient_in_recipe in fullRecipe.Ingredients)
+                {
+                    db.INGREDIENT_IN_RECIPE.Add(new INGREDIENT_IN_RECIPE(ingredient_in_recipe.amount,ingredient_in_recipe.unit,(int)tmpRECIPE.ID_RECIPE));
+                }
+
+                db.SaveChanges();
+            }
+
+            return false;
+            
+        }
     }
 }

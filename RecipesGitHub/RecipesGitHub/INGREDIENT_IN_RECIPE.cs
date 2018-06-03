@@ -14,6 +14,16 @@ namespace RecipesGitHub
     
     public partial class INGREDIENT_IN_RECIPE
     {
+        public INGREDIENT_IN_RECIPE() { }
+        public INGREDIENT_IN_RECIPE(double amount, String measurement_unit, int id_recipe)
+        {
+            this.ID_RECIPE = id_recipe;
+            this.AMOUNT = (decimal)amount;
+            this.ID_INGREDIENT = 0;
+            this.ID_MEASUREMENT = 0;
+
+        }
+
         public decimal ID_RECIPE { get; set; }
         public decimal ID_INGREDIENT { get; set; }
         public Nullable<decimal> AMOUNT { get; set; }

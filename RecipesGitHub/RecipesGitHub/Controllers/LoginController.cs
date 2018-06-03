@@ -14,6 +14,11 @@ namespace RecipesGitHub.Controllers
             return View();
         }
 
+        /**
+         * this method uses post data to log a user in using username and password.
+         * If the user credentials are correct a cookie will be set with the key USERNAME and the actual username as the keyord
+         * This is obviously not secure but is purely done for demonstrations purpose.
+         */
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Login()
         {
@@ -23,6 +28,7 @@ namespace RecipesGitHub.Controllers
 
             using(var db = new RecipeDBConnection())
             {
+                //using a bit of linq to generate a query on the entity database connection
                 var dbPassword = from item in db.accounts where item.USERNAME == username select item.PASSWORD;
 
                 foreach(String dbpass in dbPassword)
